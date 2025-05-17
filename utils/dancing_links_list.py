@@ -878,8 +878,8 @@ class DancingLinksList:
             self.restore_col(del_col)
 
     def algorithm_x(self) -> list | None:
-        if (stack_length := len(self.stack)) > 590:
-            print(stack_length)
+        # if (stack_length := len(self.stack)) > 600:
+        #     print(stack_length)
 
         if self.col_length == 0:
             return self.stack

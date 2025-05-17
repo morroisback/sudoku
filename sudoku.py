@@ -22,13 +22,29 @@ class Sudoku:
         str_field = [[f"{value:>3}" for value in row] for row in self.__field]
         return "\n".join(["".join(row) for row in str_field]) + "\n"
 
-    # def __getitem__(self, coords: tuple) -> int:
-    #     if isinstance(coords, tuple) and len(coords) == 2:
-    #         row, col = coords
-
-    #         return self.get_node(row_idx, col_idx)
-    #     else:
-    #         raise TypeError("Invalid type for indexes")
+    def __getitem__(self, coords: tuple) -> int:
+        if isinstance(coords, tuple) and len(coords) == 2:
+            row, col = coords
+            return self.get_ceil(row, col)
+        else:
+            raise TypeError("Invalid type for coordinates")
+        
+    def __delitem__(self, coords: tuple) -> None:
+        if isinstance(coords, tuple) and len(coords) == 2:
+            row, col = coords
+            self.set_ceil(row, col, 0)
+        else:
+            raise TypeError("Invalid type for coordinates")
+        
+    def __setitem__(self, coords: tuple, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Value must be int.")
+        
+        if isinstance(coords, tuple) and len(coords) == 2:
+            row, col = coords
+            self.set_ceil(row, col, value)
+        else:
+            raise TypeError("Invalid type for coordinates")
 
     def clear_xfield(self) -> None:
         self.__xfield = DancingLinksList(len(str((self.__dim, self.__dim, self.__dim))) + 1)
